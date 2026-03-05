@@ -151,9 +151,9 @@ class EarlyStopping:
         self.mode = mode
         
         if self.mode == 'min':
-            self.best_score = np.Inf
+            self.best_score = np.inf
         else:
-            self.best_score = -np.Inf
+            self.best_score = -np.inf
 
     def __call__(self, current_val, model):
         
