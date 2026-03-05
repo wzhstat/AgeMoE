@@ -19,7 +19,7 @@ pip install pandas==2.3.3 \
 pip install torch-geometric \
 conda install rdkit=2025.9.1 -c rdkit \
 ```
-We also provide the corresponding environment file, you can reproduce the environment directly through the provided .yaml file.<br>
+We also provide the corresponding environment file, you can reproduce the environment directly through the provided `.yaml` file.<br>
 ```
 conda env create -f environment.yaml
 ```
