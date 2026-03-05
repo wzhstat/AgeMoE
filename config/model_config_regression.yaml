@@ -1,0 +1,65 @@
+# config/model_config.yaml
+
+project:
+  name: "Molecule_MoE_PRnet"
+  device: "cuda"
+
+data:
+  # PRnet 相关配置
+  prnet_cache_dir: "./lincs_cache"
+  gene_list_path: "./lincs_cache/ageing_gene_intersection.txt"
+  top_n_genes: 79
+  prnet_delta: true
+
+  train_csv: "./Data/train_mean_std.csv"   # 训练集路径
+  val_csv: "./Data/valid_mean_std.csv"       # 验证集路径
+  
+  smiles_col: "SMILES"            # CSV中存放SMILES的列名
+  label_col: "delta_MorphoAge_mean"              # CSV中存放标签的列名
+  
+  fixed_dosage: 10.0              # 所有样本设定为统一剂量 (uM)
+  fixed_cell_line: "FIBRNPC"         # 所有样本设定为统一细胞系 (必须在L1000中存在)
+
+model:
+  d_model: 256
+  dropout: 0.2
+  encoders:
+    mpnn:
+      atom_dim: 84     
+      edge_dim: 14     
+      hidden_channels: 128 #在这里修改MPNN的隐藏层维度
+      num_layers: 3
+    rdkit:
+      input_dim: 200
+    prnet:
+      input_dim: 79
+
+  moe:
+    num_experts: 3
+    expert_hidden_dim: 128  #在这里修改MoE专家的隐藏层维度
+    num_heads: 4
+
+task:
+  type: "regression"        # regression, classification, multiclass
+  num_classes: 1         # 1 for regression, >1 for classification
+  predict_uncertainty: False
+  # 可选指标:
+  #   - regression: [mse, rmse, mae, r2, pearson]
+  #   - classification: [accuracy, f1, precision, recall, auc]
+  #   - multiclass: [accuracy, f1_macro, f1_micro]
+  metrics: ["accuracy", "f1_macro", "auc"]
+
+training:
+  batch_size: 32
+  lr: 0.0005
+  weight_decay: 1e-4
+  epochs: 150
+  warmup_epochs: 10
+  patience: 30
+  save_dir: "./checkpoints"
+  monitor_metric: "r2"    # 监控指标: 'r2', 'mse', 'loss', 'accuracy' 等
+  monitor_mode: "min"     # 模式: 'max' (越大越好) 或 'min' (越小越好)
+  loss_weighting:
+    enabled: False   # 是否启用基于分数的损失权重
+    threshold: -1.0     # 低于 -2.0 的被认为是“抗衰老潜力分子”
+    scale_factor: 3.0   # 权重系数。分数越低，权重越高
