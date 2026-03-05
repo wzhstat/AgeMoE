@@ -167,7 +167,9 @@ def run_analysis(config_path, checkpoint_path, output_dir='./plots'):
     
 
 if __name__ == "__main__":
-    CONFIG_PATH = './config/model_config_classification.yaml'
-    CHECKPOINT_PATH = './checkpoints/experts_6_hidden_128_MultiClass/best_model.pt' 
+    parser = argparse.ArgumentParser(description="Analyze Gene Importance for MoE Model")
+    parser.add_argument('--config', type=str, default='./config/model_config_classification.yaml', help='Path to config file')
+    parser.add_argument('--checkpoint', type=str, default='./checkpoints/experts_6_hidden_128_MultiClass/best_model.pt', help='Path to model checkpoint')
+    args = parser.parse_args()
     
-    run_analysis(CONFIG_PATH, CHECKPOINT_PATH)
+    run_analysis(args.config, args.checkpoint)
