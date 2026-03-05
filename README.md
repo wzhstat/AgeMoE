@@ -1,10 +1,12 @@
 # AgeMoE
 This is an anti-aging small molecule prediction model based on MoE.<br>
-# Install Requirements
+# Installation
+## step 1: Download AgeMoE
 ```
 git clone https://github.com/wzhstat/AgeMoE.git
 cd AgeMoE
 ```
+## Step 2: Environment
 You can manually add the environment in the following ways. The version about ```pytorch``` and ```cudatoolkit``` should be depended on your machine.<br>
 ```
 conda create -n AgeMoE python=3.10 \
@@ -21,6 +23,7 @@ We also provide the corresponding environment file, you can reproduce the enviro
 ```
 conda env create -f environment.yaml
 ```
+## Step 3: Necessary documents
 To ensure the accurate input of the model's transcription information, the ```Lincs_L1000.h5ad``` file needs to be placed under the ```lincs_cache/``` folder. This file can be downloaded from https://drive.google.com/file/d/1Z05yalquBrXG4sVitkspbvScFFXee7DJ/view?usp=sharing.<br>
 
 # Training
