@@ -139,7 +139,13 @@ def evaluate_and_plot(model, config, output_dir='./plots', file_name='regression
 
 if __name__ == "__main__":
 
-    config_path = './config/model_config_regression.yaml'
+    import argparse
+    parser = argparse.ArgumentParser(description="Evaluate Regression Model and Plot Results")
+    parser.add_argument('--config', type=str, default='./config/model_config_regression.yaml', help='Path to config file')
+    parser.add_argument('--checkpoint', type=str, default='./checkpoints/experts_3_round_12_mean_sota/best_model.pt', help='Path to model checkpoint')
+    args = parser.parse_args()
+
+    config_path = args.config
     print(f"Loading config from {config_path}")
     with open(config_path, 'r') as f:
         cfg = yaml.safe_load(f)
@@ -151,11 +157,10 @@ if __name__ == "__main__":
     cfg['model']['moe']['expert_hidden_dim'] = 128
     cfg['task']['predict_uncertainty'] = False
     cfg['training']['batch_size'] = 64 
-    cfg['training']['save_dir'] = './checkpoints/experts_3_round_12_mean_sota/'
     model = MoleculeMoEPRnet(config=cfg)
     
 
-    checkpoint_path = os.path.join(cfg['training']['save_dir'], 'best_model.pt')
+    checkpoint_path = args.checkpoint
     
     if os.path.exists(checkpoint_path):
         print(f"Loading weights from {checkpoint_path}")
