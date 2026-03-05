@@ -1,5 +1,5 @@
 # AgeMoE
-This model is an anti-aging drug scoring model based on the MoE framework and incorporating transcription information..<br>
+This model is an anti-aging drug scoring model based on the MoE framework and incorporating transcription information.<br>
 # Installation
 ## step 1: Download AgeMoE
 ```
