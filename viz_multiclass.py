@@ -151,8 +151,23 @@ def run_analysis(config_path, checkpoint_path, output_dir='./plots'):
     num_experts = cfg['model']['moe']['num_experts']
     plot_expert_analysis(router_weights, y_true, num_experts, output_dir)
 
+    #save the predictions results for further analysis
+    raw_data = pd.read_csv(cfg['data']['val_csv'])
+    raw_data['pred_0'] = y_score[:, 0]
+    raw_data['pred_1'] = y_score[:, 1]
+    raw_data['pred_2'] = y_score[:, 2]
+    raw_data['true_label'] = y_true
+    
+    # save in predictions folder
+    if not os.path.exists('./predictions'):
+        os.makedirs('./predictions')
+    pred_save_path = os.path.join('./predictions', 'val_predictions_classification.csv')
+    raw_data.to_csv(pred_save_path, index=False)
+    print(f"Predictions saved to {pred_save_path}")
+    
+
 if __name__ == "__main__":
-    CONFIG_PATH = './MoEv2/config/model_config.yaml'
-    CHECKPOINT_PATH = './MoEv2/checkpoints/experts_6_hidden_128_MultiClass/best_model.pt' 
+    CONFIG_PATH = './config/model_config_classification.yaml'
+    CHECKPOINT_PATH = './checkpoints/experts_6_hidden_128_MultiClass/best_model.pt' 
     
     run_analysis(CONFIG_PATH, CHECKPOINT_PATH)

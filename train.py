@@ -19,7 +19,7 @@ def main():
     parser.add_argument('--hidden_channels', type=int, default=None, help='Hidden channels for MPNN') 
     parser.add_argument('--moe_hidden_dim', type=int, default=None, help='Hidden dimension for MoE experts')
     parser.add_argument('--lr', type=float, default=None, help='Initial learning rate')
-    parser.add_argument('--config', type=str, default='./MoEv2/config/model_config.yaml', help='Path to config file')
+    parser.add_argument('--config', type=str, default='./config/model_config_classification.yaml', help='Path to config file')
     args = parser.parse_args()
     config_path = args.config
     
