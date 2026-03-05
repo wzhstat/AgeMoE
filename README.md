@@ -1,6 +1,9 @@
 # AgeMoE
 This is an anti-aging small molecule prediction model based on MoE.<br>
 # Install Requirements
+```
+git clone
+```
 You can manually add the environment in the following ways. The version about ```pytorch``` and ```cudatoolkit``` should be depended on your machine.<br>
 ```
 conda create -n AgeMoE python=3.10 \
