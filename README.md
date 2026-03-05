@@ -71,3 +71,4 @@ python viz_gene_importance.py \
   --config ./config/model_config_classification.yaml \
   --checkpoint ./checkpoints/experts_6_hidden_128_MultiClass/best_model.pt \
 ```
+**Note:** Please ensure that the parameters of the evaluation model are consistent with in the config.
