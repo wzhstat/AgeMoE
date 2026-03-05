@@ -13,8 +13,34 @@ pip install pandas==2.3.3 \
 pip install torch-geometric \
 conda install rdkit=2025.9.1 -c rdkit \
 ```
-We also provide the corresponding environment file, You can reproduce the environment directly through the provided .yaml file.<br>
+We also provide the corresponding environment file, you can reproduce the environment directly through the provided .yaml file.<br>
 ```
 conda env create -f environment.yaml
 ```
-To ensure the accurate input of the model's transcription information, the Lincs_L1000.h5ad file needs to be placed in the ```lincs_cache``` folder. This file can be downloaded from https://drive.google.com/file/d/1Z05yalquBrXG4sVitkspbvScFFXee7DJ/view?usp=sharing.
+To ensure the accurate input of the model's transcription information, the ```Lincs_L1000.h5ad``` file needs to be placed under the ```lincs_cache/``` folder. This file can be downloaded from https://drive.google.com/file/d/1Z05yalquBrXG4sVitkspbvScFFXee7DJ/view?usp=sharing.<br>
+
+# Training
+Training is driven by Hydra configs in ```configs/```. The default entry point is ```train.py```.<br>
+**Basic command:**<br>
+```
+python train.py \
+  --train_csv ./Data/train_mean_std.csv \
+  --val_csv ./Data/valid_mean_std.csv \
+  --label_col Class \
+  --save_dir ./checkpoints/experts_6_hidden_128_MultiClass \
+```
+**Key args to modify:**
+- `--train_csv`: Path to training CSV file.
+- `--val_csv`: Path to validation CSV file.
+- `--label_col`: Name of the label column in CSV.
+- `--save_dir`: The storage path of checkpoints.
+- `--num_experts`: The number of experts used in the model.
+- `--predict_uncertainty`: Whether to predict uncertainty (for regression tasks).
+- `--hidden_channels`: Hidden channels for MPNN.
+- `--moe_hidden_dim`: Hidden dimension for MoE experts.
+- `--lr`: Initial learning rate.
+- `--config`: Path to config file.
+
+**Outputs**:
+- Checkpoints under `--save_dir`.
+- By default, best checkpoints are selected with `training.monitor_metric`
