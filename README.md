@@ -1,5 +1,5 @@
 # AgeMoE
-This is an anti-aging small molecule prediction model based on MoE.<br>
+This model is an anti-aging drug scoring model based on the MoE framework and incorporating transcription information..<br>
 # Installation
 ## step 1: Download AgeMoE
 ```
