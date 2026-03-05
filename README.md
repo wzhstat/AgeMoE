@@ -2,7 +2,8 @@
 This is an anti-aging small molecule prediction model based on MoE.<br>
 # Install Requirements
 ```
-git clone
+git clone https://github.com/wzhstat/AgeMoE.git
+cd AgeMoE
 ```
 You can manually add the environment in the following ways. The version about ```pytorch``` and ```cudatoolkit``` should be depended on your machine.<br>
 ```
