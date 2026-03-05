@@ -51,3 +51,17 @@ python train.py \
 **Outputs**:
 - Checkpoints under `--save_dir`.
 - By default, best checkpoints are selected with `training.monitor_metric`
+
+# Inference / Evaluation
+For regression models, inference is performed by `viz_regression.py`. e.g
+```
+python viz_regression.py \
+  --config ./config/model_config_regression.yaml \
+  --checkpoint ./checkpoints/experts_3_round_12_mean_sota/best_model.pt \
+```
+For classification models, inference is performed by `viz_classification.py`. e.g
+```
+python viz_classification.py \
+  --config ./config/model_config_classification.yaml \
+  --checkpoint ./checkpoints/experts_6_hidden_128_MultiClass/best_model.pt \
+```
