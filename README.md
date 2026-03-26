@@ -15,12 +15,12 @@ conda activate AgeMoE \
 ```
 ```
 pip3 install torch==2.4.0+cu121 torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121 \
-pip install numpy==1.24.3 \
 pip install pyyaml==6.0.3 \
 pip install scanpy \
 pip install pandas==2.3.3 \
 pip install torch-geometric \
-conda install rdkit=2025.9.1 -c rdkit 
+pip install numpy==1.24.3 \
+conda install rdkit=2022.09.5 -c rdkit 
 ```
 We also provide the corresponding environment file, you can reproduce the environment directly through the provided `.yaml` file.<br>
 ```
