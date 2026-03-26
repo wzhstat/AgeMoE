@@ -11,6 +11,9 @@ You can manually add the environment in the following ways. The version about ``
 ```
 conda create -n AgeMoE python=3.10 \
 conda activate AgeMoE \
+
+```
+```
 pip3 install torch==2.4.0+cu121 torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121 \
 pip install numpy==1.24.3 \
 pip install pyyaml==6.0.3 \
